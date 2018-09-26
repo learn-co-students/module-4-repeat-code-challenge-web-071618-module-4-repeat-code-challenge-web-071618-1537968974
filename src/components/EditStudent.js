@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditStudent = () => {
+const EditStudent = (props) => {
 
   return (
     <form
@@ -12,18 +12,21 @@ const EditStudent = () => {
           <input
             id="name"
             type="text"
+            value={props.currentStudent.name}
           />
         </div>
         <div className="four wide field">
           <input
             id="class_year"
             type="number"
+            value={props.currentStudent.class_year}
           />
         </div>
         <div className="four wide field">
           <input
             id="percentage"
             type="number"
+            value={props.currentStudent.percentage}
           />
         </div>
         <button className="ui button" type="submit">
