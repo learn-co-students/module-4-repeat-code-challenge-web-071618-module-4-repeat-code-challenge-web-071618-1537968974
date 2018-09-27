@@ -27,29 +27,94 @@ class CourseContainer extends Component {
       .then(res => res.json())
       .then(studentData => this.setState({
         students: studentData.students
-      }, () => console.log("students array", this.state.students)))
+      // }, () => console.log("students array", this.state.students)))
+      }))
 
 // debugger
     this.setState({
       currentCourse: currentCourse
-    }, () => console.log(this.state.currentCourse))
+    // }, () => console.log(this.state.currentCourse))
+    })
   }
 
 
-  //ATTEMPT AT EDIT / EDIT FORM
-  handleClick = (event) => {
-    this.setState({
-      currentStudent: event.target.parentElement.parentElement
-    }, () => console.log("parent element is", this.state.currentStudent))
-  }
+      // //ATTEMPT AT EDIT / EDIT FORM
+      handleClick = (student) => {
+        // debugger
+        this.setState({
+          currentStudent: student
+        // }, () => console.log("handleClick student is", this.state.currentStudent))
+        })
+      }
 
-  // currentStudent: event.target.parentElement.parentElement.querySelector("td")
 
+      // updateName = (event) => {
+      //   // console.log(event.target.value)
+      //     this.setState({
+      //       ...this.state,
+      //       currentStudent:
+      //     {
+      //       ...this.state.currentStudent,
+      //       name: event.target.value
+      //     }
+      //   })
+      // }
+      //
+      //
+      // updateClassYear = (event) => {
+      //   // console.log("classyear", event.target.value)
+      //     this.setState({
+      //       ...this.state,
+      //       currentStudent:
+      //     {
+      //       ...this.state.currentStudent,
+      //       class_year: event.target.value
+      //     }
+      //   })
+      // }
+      //
+      //
+      // updatePercentage = (event) => {
+      //   // console.log("percentage", event.target.value)
+      //   this.setState({
+      //     ...this.state,
+      //     currentStudent:
+      //     {
+      //       ...this.state.currentStudent,
+      //       percentage: event.target.value
+      //     }
+      //   })
+      // }
+
+
+      update = (event) => {
+        // console.log("percentage", event.target.value)
+        this.setState({
+          ...this.state,
+          currentStudent:
+          {
+            ...this.state.currentStudent,   // prevents overwriting other keys in the currentStudent state not listed below
+            [event.target.name]: event.target.value,   // this way requires you add 'name' to the input fields in your Form
+            [event.target.name]: event.target.value,
+            [event.target.name]: event.target.value
+          }
+        })
+      }
+
+
+      handleSubmit = (event) => {
+        this.setState(prevState => ({
+          students: prevState.students.map(
+            student => (student.id === this.state.currentStudent.id ? Object.assign(student, this.state.currentStudent) : student)
+          )
+        }))
+        event.preventDefault()
+      }
 
 
   render() {
-
-    console.log("CourseContainer currentCourse", this.state.currentCourse)
+    console.log("students state", this.state.students)
+    console.log("CourseContainer currentStudent", this.state.currentStudent)
 
     return (
       <div className="ui grid container">
@@ -61,9 +126,9 @@ class CourseContainer extends Component {
 
         <CourseSelector courses={this.state.courses} currentCourse={this.state.currentCourse} handleChange={this.handleChange} />
 
-        <EditStudent currentStudent={this.state.currentStudent} />
+        <EditStudent currentStudent={this.state.currentStudent} updateName={this.updateName} updateClassYear={this.updateClassYear} updatePercentage={this.updatePercentage} handleSubmit={this.handleSubmit} update={this.update} />
 
-        <StudentsList students={this.state.students} handleClick={this.handleClick} />
+        <StudentsList students={this.state.students} handleClick={this.handleClick} currentStudent={this.state.currentStudent} />
       </div>
     )
   }

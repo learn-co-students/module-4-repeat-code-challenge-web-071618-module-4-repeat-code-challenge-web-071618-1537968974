@@ -8,7 +8,8 @@ const Student = (props) => {
       <td>{props.student.class_year}</td>
       <td>{props.student.percentage}</td>
       <td>
-        <button className="ui button left" onClick={props.handleClick}>
+        {/* <button className="ui button left" onClick={props.handleClick}> */}
+        <button className="ui button left" onClick={() => props.handleClick(props.student)}>
           Edit
         </button>
       </td>

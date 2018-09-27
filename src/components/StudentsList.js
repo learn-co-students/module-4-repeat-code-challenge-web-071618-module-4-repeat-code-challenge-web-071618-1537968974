@@ -2,7 +2,7 @@ import React from "react";
 import Student from "./Student";
 
 const StudentsList = (props) => {
-  console.log("Student props", props)
+  // console.log("Student props", props)
 
   const mappedStudents = props.students.map(student => <Student student={student} key={student.id} handleClick={props.handleClick} />)
 

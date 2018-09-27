@@ -1,7 +1,7 @@
 import React from "react";
 
 const CourseSelector = (props) => {
-  console.log("CourseSelector props", props)
+  // console.log("CourseSelector props", props)
 
   // const mappedCourses = props.courses.map(course => course.name)
   const courseList = props.courses
